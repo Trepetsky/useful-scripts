@@ -11,7 +11,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 tokenizer = AutoTokenizer.from_pretrained("Rostlab/prot_bert_bfd", do_lower_case=False)
 model = AutoModel.from_pretrained("Rostlab/prot_bert_bfd").eval().to(device)
 model = tp.tensor_parallel(model, ["cuda:0", "cuda:1"])
-fasta_file = '/kaggle/input/cafa-5-protein-function-prediction/Train/train_sequences.fasta'
+fasta_file = 'file.fasta'
 
 sequences = [" ".join(str(record.seq)) for record in SeqIO.parse(fasta_file, "fasta")]
 
